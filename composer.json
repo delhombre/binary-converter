@@ -1,0 +1,29 @@
+{
+    "name": "delhombre/php-tdd-boilerplate",
+    "description": "Designed to kickstart Test-Driven Development",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Delhombre\\TDD\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Delhombre\\TDD\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "delhombre",
+            "email": "brunodogbase@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "pestphp/pest": "^2.28"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

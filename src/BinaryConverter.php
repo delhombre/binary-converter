@@ -19,7 +19,7 @@ final class BinaryConverter
     private ?string $inputType;
 
     /**
-     * @param value-of<Type> $inputType
+     * @param  value-of<Type>  $inputType
      */
     public static function from(int|string $input, ?string $inputType = null): BinaryConverter
     {
@@ -28,7 +28,7 @@ final class BinaryConverter
         $binaryConverter->input = $input;
 
         if (isset($inputType)) {
-            if (!in_array($inputType, ['int', 'hex', 'binary'])) {
+            if (! in_array($inputType, ['int', 'hex', 'binary'])) {
                 throw new InvalidArgumentException('Invalid input type. Allowed types are int, hex and binary.');
             }
             $binaryConverter->inputType = $inputType;

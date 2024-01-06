@@ -8,13 +8,31 @@ use BinaryConverter\Exceptions\InvalidArgumentException;
 
 final class BinaryConverter
 {
+    public const Type = [
+        'INT' => 'int',
+        'HEX' => 'hex',
+        'BINARY' => 'binary',
+    ];
+
     private int|string $input;
 
-    public static function from(int|string $input): BinaryConverter
+    private ?string $inputType;
+
+    /**
+     * @param value-of<Type> $inputType
+     */
+    public static function from(int|string $input, ?string $inputType = null): BinaryConverter
     {
         $binaryConverter = new self();
 
         $binaryConverter->input = $input;
+
+        if (isset($inputType)) {
+            if (!in_array($inputType, ['int', 'hex', 'binary'])) {
+                throw new InvalidArgumentException('Invalid input type. Allowed types are int, hex and binary.');
+            }
+            $binaryConverter->inputType = $inputType;
+        }
 
         return $binaryConverter;
     }
@@ -57,6 +75,10 @@ final class BinaryConverter
 
     private function detectInputType(): string
     {
+        if (isset($this->inputType)) {
+            return $this->inputType;
+        }
+
         if ($this->isInteger($this->input)) {
             return 'int';
         }
@@ -65,9 +87,6 @@ final class BinaryConverter
         }
         if (preg_match('/^[01]+$/', (string) $this->input)) {
             return 'binary';
-        }
-        if (preg_match('/^\d+$/', (string) $this->input)) {
-            return 'dec';
         }
 
         return 'unknown';

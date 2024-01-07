@@ -8,7 +8,10 @@ use BinaryConverter\Exceptions\InvalidArgumentException;
 
 final class BinaryConverter
 {
-    public const Type = [
+    /**
+     * @var array<string, string>
+     */
+    public const array Type = [
         'INT' => 'int',
         'HEX' => 'hex',
         'BINARY' => 'binary',
@@ -16,10 +19,10 @@ final class BinaryConverter
 
     private int|string $input;
 
-    private ?string $inputType;
+    private ?string $inputType = null;
 
     /**
-     * @param  value-of<Type>  $inputType
+     * @param  value-of<BinaryConverter::Type>  $inputType
      */
     public static function from(int|string $input, ?string $inputType = null): BinaryConverter
     {
@@ -75,7 +78,7 @@ final class BinaryConverter
 
     private function detectInputType(): string
     {
-        if (isset($this->inputType)) {
+        if ($this->inputType !== null) {
             return $this->inputType;
         }
 

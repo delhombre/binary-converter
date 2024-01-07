@@ -22,7 +22,7 @@ First, install BinaryConverter via the [Composer](https://getcomposer.org/) pack
 composer require delhombre/binary-converter
 ```
 
-Then, interact with OpenAI's API:
+Then, interact with the package:
 
 ```php
 $converter = BinaryConverter::from(2024);
